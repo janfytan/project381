@@ -1,0 +1,21 @@
+<html>
+	<head>
+		<title>Restaurant App</title>
+	</head>
+	<body>
+		<% include header %>
+		<div class="container" style="margin-top:200px" align="center">
+			<div class="card text-center col-md-4">
+				<div class="card-body">
+					<h3>Rate</h3>
+					<form action="/doRate" method="get">
+						<p>Score:</p>
+						<input type="hidden" name="_id" value="<%= restaurant._id %>">
+						<input type="number" name="score" class="form-control" placeholder="Please enter 1-10" min="1" max="10" required><br>
+						<input type="submit" value="Rate" class="btn btn-primary btn-block"><br>
+					</form>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

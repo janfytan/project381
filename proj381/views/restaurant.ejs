@@ -1,0 +1,72 @@
+<html>
+	<head>
+		<title>restaurant - <%= restaurant.name %></title>
+		<style>
+			a.disabled{
+				pointer-events: none;
+				curosor: default;			
+			}
+		</style>
+	</head>
+	<body>
+		<% include header %>
+		<div class="container" style="margin-top:100px;margin-bottom:100px">
+			<div class="card">
+				<div class="card-header">
+					<h3>Name of the restaurant </h3>
+					<h3><%= restaurant.name %></h3>
+				</div>
+				<div class="card-body card-text">
+					<% if (restaurant.photo) { %>
+						<img class="card-img-top" src="data:<%= restaurant.photo_mimetype %>;base64, <%= restaurant.photo %>">
+						<hr>
+					<% } %>
+					<p align="right">
+						<p align="right">
+						<a href="/rate?_id=<%= restaurant._id %>" class="btn btn-primary">Rate</a>
+					<% if (restaurant.owner ==  session.userid) { %>
+						<a href="/editRestaurant?_id=<%= restaurant._id %>" class="btn btn-primary ">Edit</a>
+						<a href="/deleteRestaurant?_id=<%= restaurant._id %>" class="btn btn-primary ">Delete</a>
+					<% } else { %>
+						<a href="#" class="btn btn-primary disabled">Edit</a>
+						<a href="#" class="btn btn-primary disabled">Delete</a>
+					<% } %>
+					</p>
+					<p align="right">
+						<a href="javascript:history.back()" class="btn btn-primary">Go Back</a>
+					</p>
+					<% if (restaurant.address) { %>
+						<% if (restaurant.address.coord != "") { %>
+							<p align="right">
+								<a href="/map?lat=<%= restaurant.address.coord[0] %>&lon=<%= restaurant.address.coord[1] %>&title=<%= restaurant.name %>" style="text-decoration:underline">Google Map</a>
+							</p>
+						<% } %>
+					<% } %>
+					<p><label class="text-primary">Restaurant ID:</label> <%= restaurant.restaurant_id %></p>
+					<p><label class="text-primary">Borough:</label> <%= restaurant.borough %></p>
+					<p><label class="text-primary">Cuisine:</label> <%= restaurant.cuisine %></p>
+					<% if (restaurant.address) { %>
+						<p><label class="text-primary">Street:</label> <%= restaurant.address.street ? restaurant.address.street : "" %></p>
+						<p><label class="text-primary">Building:</label> <%= restaurant.address.building ? restaurant.address.building : "" %></p>
+						<p><label class="text-primary">Zipcode:</label> <%= restaurant.address.zipcode ? restaurant.address.zipcode : "" %></p>
+						<p><label class="text-primary">Coordinate:</label> [<%= restaurant.address.coord ? restaurant.address.coord : "" %>]</p>
+					<% } else { %>
+						<p><label class="text-primary">Street:</label></p>
+						<p><label class="text-primary">Building:</label></p>
+						<p><label class="text-primary">Zipcode:</label></p>
+						<p><label class="text-primary">Coordinate:</label> []</p>
+					<% } %>
+					<p><label class="text-primary">Rating:</label>
+						<ul class="list-group">
+							<% for (i in restaurant.grades) { %>
+								<li class="list-group-item"><%= restaurant.grades[i].score %> (<%= restaurant.grades[i].user %>)</li>
+							<% } %>
+						</ul>
+					</p>
+
+					<p><label class="text-primary">Owner:</label> <%= restaurant.owner %></p>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

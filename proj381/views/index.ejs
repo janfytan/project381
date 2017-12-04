@@ -1,0 +1,27 @@
+<html>
+	<head>
+		<title>restaurant</title>
+	</head>
+	<body>
+		<% include header %>
+		<div class="container" style="margin-top:200px">
+			<h2>Showing <%= restaurants.length %> documents</h2>
+			<h2>(criteria: {
+				<% 
+				var count = 1;
+				for (i in criteria) { 
+				%>
+					"<%= i %>": "<%= criteria[i] %>"
+					<% if (count != Object.keys(criteria).length) { %>,<% }
+					count++;%>
+				<% } %>
+			})</h3>
+			<hr>
+			<div class="list-group">
+				<% for (i in restaurants) { %>
+					<a href="/restaurant?_id=<%= restaurants[i]._id %>" class="list-group-item"><%= restaurants[i].name %></a>
+				<% } %>
+			</div>
+		</div>
+	</body>
+</html>

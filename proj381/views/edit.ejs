@@ -1,0 +1,39 @@
+<html>
+	<head>
+		<title>Restaurant App</title>
+		
+	</head>
+
+	<body>
+		<% include header %>
+		<div class="container" style="margin-top:100px" align="center">
+			<div class="card col-md-4">
+				<br>
+				<h3>Edit Restaurant</h3>
+				<br>
+				<form method="post" enctype="multipart/form-data">
+					<input type="text" name="name" class="form-control" placeholder="name" value="<%= restaurant.name %>" required><br>
+					<input type="text" name="borough" class="form-control" placeholder="borough" value="<%= restaurant.borough ? restaurant.borough : "" %>" ><br>
+					<input type="text" name="cuisine" class="form-control" placeholder="cuisine" value="<%= restaurant.cuisine ? restaurant.cuisine : "" %>"><br>
+					<input type="file" name="photoToUpload" value=""><br><br>
+					<% if (restaurant.address) { %>
+					<input type="text" name="address_street" class="form-control" placeholder="address_street" value="<%= restaurant.address.street ? restaurant.address.street : "" %>"><br>
+					<input type="text" name="address_building" class="form-control" placeholder="address_building" value="<%= restaurant.address.building ? restaurant.address.building : "" %>"><br>
+					<input type="text" name="address_zipcode" class="form-control" placeholder="address_zipcode" value="<%= restaurant.address.zipcode ? restaurant.address.zipcode : "" %>"><br>
+					<input type="text" name="address_coord" class="form-control" placeholder="address_coord" value="<%= restaurant.address.coord.length == 2 ? restaurant.address.coord[0] + "," + restaurant.address.coord[1] : "" %>"><br>
+					<% } else { %>
+					<input type="text" name="address_street" class="form-control" placeholder="address_street" value=""><br>
+					<input type="text" name="address_building" class="form-control" placeholder="address_building" value=""><br>
+					<input type="text" name="address_zipcode" class="form-control" placeholder="address_zipcode" value=""><br>
+					<input type="text" name="address_coord" class="form-control" placeholder="address_coord" value=""><br>
+					<% } %>
+					<p>
+						<font color="red"><b><%= message %></b></font>
+					</p>
+					
+					<input type="submit" value="Edit" formaction="/updateRestaurant?_id=<%= restaurant._id %>" class="btn btn-primary btn-block"><br>
+				</form>
+			</div>
+		</div>
+	</body>
+</html>

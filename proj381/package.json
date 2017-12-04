@@ -1,0 +1,18 @@
+{
+    "name": "rserver",
+    "description": "restaurant system",
+    "author": "Tan Zhanhui",
+    "version": "0.0.1",
+    "dependencies": {
+        "body-parser": "latest",
+        "cookie-session": "latest",
+        "ejs": "latest",
+        "express": "latest",
+        "express-fileupload": "latest",
+        "mongodb": "latest"
+    },
+    "engine": "node >= 0.10.0",
+    "scripts": {
+        "start": "node server"
+    }
+}
